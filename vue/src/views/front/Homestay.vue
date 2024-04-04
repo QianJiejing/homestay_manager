@@ -29,32 +29,34 @@
     </div>
 
     <!-- 侧边栏 -->
-    <div class="sidebar">
-      <el-button type="text" @click="showMessage" class="sidebar-btn">
-        <i class="el-icon-message"></i> 消息
-      </el-button>
-      <el-button type="text" @click="contactHomestay" class="sidebar-btn">
-        <i class="el-icon-service"></i> 联系我们
-      </el-button>
-      <el-button type="text" @click="backToTop" class="sidebar-btn" v-show="showBackToTop">
-        <i class="el-icon-upload2"></i> 回顶部
-      </el-button>
-    </div>
+    <MessageAside
+        :showBackToTop="showBackToTop"
+        :showSidebar="showSidebar"
+        :showContactHomestay="showContactHomestay"
+        @showMessage="showMessage"
+        @contactHomestay="contactHomestay"
+        @backToTop="backToTop"
+    ></MessageAside>
 
   </div>
 </template>
 
 <script>
-
+import MessageAside from "@/components/MessageAside.vue"
 export default {
-
+  components: {
+    MessageAside
+  },
+  name: "FrontHomestay",
   data() {
     let homestayId = this.$route.query.id
     return {
       homestayData: {},
       typeData: [],
       homestayId: homestayId,
+      showContactHomestay: true,
       showBackToTop: false,
+      showSidebar: true, // 控制侧边栏显示与隐藏
     }
   },
   mounted() {

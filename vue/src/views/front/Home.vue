@@ -72,28 +72,31 @@
       <div class="right-bg"></div>
     </div>
     <!-- 侧边栏 -->
-    <div class="sidebar" v-show="showSidebar">
-      <el-button type="text" @click="showMessage" class="sidebar-btn">
-        <i class="el-icon-message"></i> 消息
-      </el-button>
-      <el-button type="text" @click="contactAdmin" class="sidebar-btn">
-        <i class="el-icon-service"></i> 联系管理员
-      </el-button>
-      <el-button type="text" @click="backToTop" v-show="showBackToTop" class="sidebar-btn">
-        <i class="el-icon-upload2"></i> 回顶部
-      </el-button>
-    </div>
-
+    <MessageAside
+        :showBackToTop="showBackToTop"
+        :showSidebar="showSidebar"
+        :showContactAdmin="showContactAdmin"
+        @showMessage="showMessage"
+        @contactAdmin="contactAdmin"
+        @backToTop="backToTop"
+    ></MessageAside>
+    <!-- 底部 -->
+    <Footer />
   </div>
 
 </template>
 
 <script>
-
+import Footer from "@/components/Footer.vue";
+import MessageAside from "@/components/MessageAside.vue"
 export default {
-
+  components: {
+    Footer,
+    MessageAside
+  },
   data() {
     return {
+      showContactAdmin: true,
       showBackToTop: false,
       showSidebar: false, // 控制侧边栏显示与隐藏
       homestayData:[],

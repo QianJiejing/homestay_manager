@@ -202,17 +202,14 @@
       </div>
     </el-dialog>
     <!-- 侧边栏 -->
-    <div class="sidebar">
-      <el-button type="text" @click="showMessage" class="sidebar-btn">
-        <i class="el-icon-message"></i> 消息
-      </el-button>
-      <el-button type="text" @click="contactHomestay" class="sidebar-btn">
-        <i class="el-icon-service"></i> 联系我们
-      </el-button>
-      <el-button type="text" @click="backToTop" class="sidebar-btn" v-show="showBackToTop">
-        <i class="el-icon-upload2"></i> 回顶部
-      </el-button>
-    </div>
+    <MessageAside
+        :showBackToTop="showBackToTop"
+        :showSidebar="showSidebar"
+        :showContactHomestay="showContactHomestay"
+        @showMessage="showMessage"
+        @contactHomestay="contactHomestay"
+        @backToTop="backToTop"
+    ></MessageAside>
 
     <!-- 回复对话框 -->
     <el-dialog title="回复评价"
@@ -250,10 +247,12 @@
 
 <script>
 import CommentItem from '@/components/CommentItem.vue';
+import MessageAside from "@/components/MessageAside.vue"
 
 export default {
   components: {
-    CommentItem
+    CommentItem,
+    MessageAside
   },
   data() {
     let typeId = this.$route.query.id
@@ -266,7 +265,9 @@ export default {
       outTime: null,
       fromVisible: false,
       commentData: [],
+      showContactHomestay: true,
       showBackToTop: false,
+      showSidebar: true, // 控制侧边栏显示与隐藏
       commentCount: 0,
       commentForm : {
         content: '',
