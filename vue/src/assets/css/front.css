@@ -1,0 +1,163 @@
+.front-notice {
+    padding: 5px 20px;
+    color: #666;
+    font-size: 12px
+}
+.front-notice:hover {
+    color: #409EFF; /* 改变文字颜色 */
+    cursor: pointer; /* 鼠标指针变为手型 */
+}
+
+.official-notice{
+    margin: auto 20px;
+}
+
+.front-header {
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #eee;
+    background: white;
+}
+.front-header-left {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+.front-header-left img, .front-header-dropdown img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%
+}
+.front-header-left .title {
+    flex: 1;
+    color: #355476;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.front-header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.front-header-search {
+    width: 22%;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.front-header-search .el-input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.show-element {
+    display: block;
+}
+
+.hide-element {
+    display: none;
+}
+
+.front-header-right {
+    width: 200px;
+    padding-right: 20px;
+    text-align: right;
+}
+.front-header-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.el-dropdown-menu {
+    width: 100px !important;
+    text-align: center !important;
+}
+
+@media screen and (max-width: 1250px) {
+    .front-header-nav .el-menu-item:not(:first-child){
+        display: none;
+    }
+    .show-element {
+        display: none;
+    }
+
+    .hide-element {
+        display: block;
+    }
+
+}
+
+@media screen and (max-width: 1060px) {
+    .front-header-center {
+        justify-content: flex-start;
+        margin-left: 20px;
+    }
+    .front-header-left {
+        width: auto;
+        flex: 1;
+    }
+
+    .front-header-left .title {
+        display: none;
+    }
+    .front-header-search {
+        width: auto;
+        flex: 1;
+        padding-right: 10px;
+    }
+    .front-header-right {
+        width: auto;
+    }
+}
+@media screen and (max-width: 700px) {
+    .front-header-nav .el-menu-item:first-child {
+        display: none;
+    }
+    .front-header-search {
+        width: auto;
+        flex: 1;
+        padding-right: 10px;
+    }
+
+    .front-header-search .el-input {
+        margin-right: 5px;
+    }
+
+    .front-header-search .el-button {
+        padding: 10px;
+    }
+    .front-header-dropdown img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .username-container {
+        max-width: 80px;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+}
+.username-container {
+    white-space: nowrap; /* 确保文本在一行内显示 */
+    overflow: hidden; /* 隐藏超出容器的文本 */
+    text-align: center;
+    text-overflow: ellipsis; /* 显示省略号 */
+    max-width: 120px;
+    margin-left: 10px;
+}
+/*页面具体样式自定义*/
+.main-content {
+    width: 100%;
+    margin: 5px auto;
+}
+/* ElementUI 样式覆盖 */
+.el-menu.el-menu--horizontal {
+    border: none !important;
+    height: 59px;
+}
