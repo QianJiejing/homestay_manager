@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ImSingleMapper">
+
+    <sql id="Base_Column_List">
+        id,content,fromuser,fromavatar,time,type,touser,toavatar,readed
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.ImSingle">
+        select
+        <include refid="Base_Column_List" />
+        from imsingle
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="content != null"> and content= #{content}</if>
+            <if test="fromuser != null"> and fromuser= #{fromuser}</if>
+            <if test="fromavatar != null"> and fromavatar= #{fromavatar}</if>
+            <if test="time != null"> and time= #{time}</if>
+            <if test="type != null"> and type= #{type}</if>
+            <if test="touser != null"> and touser= #{touser}</if>
+            <if test="toavatar != null"> and toavatar= #{toavatar}</if>
+            <if test="readed != null"> and readed= #{readed}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.ImSingle">
+        select
+        <include refid="Base_Column_List" />
+        from imsingle
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from imsingle
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.ImSingle" useGeneratedKeys="true">
+        insert into imsingle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="content != null">content,</if>
+                <if test="fromuser != null">fromuser,</if>
+                <if test="fromavatar != null">fromavatar,</if>
+                <if test="time != null">time,</if>
+                <if test="type != null">type,</if>
+                <if test="touser != null">touser,</if>
+                <if test="toavatar != null">toavatar,</if>
+                <if test="readed != null">readed,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="content != null">#{content},</if>
+                <if test="fromuser != null">#{fromuser},</if>
+                <if test="fromavatar != null">#{fromavatar},</if>
+                <if test="time != null">#{time},</if>
+                <if test="type != null">#{type},</if>
+                <if test="touser != null">#{touser},</if>
+                <if test="toavatar != null">#{toavatar},</if>
+                <if test="readed != null">#{readed},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.ImSingle">
+        update imsingle
+        <set>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="fromuser != null">
+                fromuser = #{fromuser},
+            </if>
+            <if test="fromavatar != null">
+                fromavatar = #{fromavatar},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="touser != null">
+                touser = #{touser},
+            </if>
+            <if test="toavatar != null">
+                toavatar = #{toavatar},
+            </if>
+            <if test="readed != null">
+                readed = #{readed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
