@@ -249,7 +249,7 @@
 </template>
 
 <script>
-import CommentItem from '@/views/components/CommentItem.vue';
+import CommentItem from '@/components/CommentItem.vue';
 
 export default {
   components: {
