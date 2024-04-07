@@ -177,12 +177,12 @@
         <CommentItem
             :user="user"
             :commentData="commentData"
-            :replyData="replyData"
             :replyPageSize="replyPageSize"
             :showAllReplies="showAllReplies"
             @openReplyDialog="openReplyDialog"
             @del="del"
             @toggleReplies="toggleReplies"
+            @loadReplies="loadReplies"
         ></CommentItem>
       </div>
     </div>
@@ -413,38 +413,16 @@ export default {
       this.$request.get('comment/selectCommentByTypeId?id=' + this.typeId).then(res => {
         if (res.code === '200') {
           this.commentData = res.data;
-          // 加载每个评论的回复数量
-          this.loadCommentReplyCounts(this.commentData);
           // 初始化每个评论的回复分页数据
           this.commentData.forEach(comment => {
-            this.$set(comment, 'replyPageNum', 1);
+            this.loadReplies(comment.id,this.replyPageNum);
           });
         } else {
           this.$message.error(res.msg);
         }
       });
     },
-    loadCommentReplyCounts(comments) {
-      comments.forEach(comment => {
-        // 如果评论有回复
-        if (comment.children && comment.children.length > 0) {
-          // 计算回复数量
-          comment.replyCount = this.countReplies(comment.children);
-        } else {
-          // 如果没有回复，则回复数量为0
-          comment.replyCount = 0;
-        }
-      });
-    },
-    countReplies(comments) {
-      let count = comments.length;
-      comments.forEach(comment => {
-        if (comment.children && comment.children.length > 0) {
-          count += this.countReplies(comment.children);
-        }
-      });
-      return count;
-    },
+
     loadReplies(commentId, pageNum) {
       // 发起请求加载评论的回复数据
       this.$request.get('comment/selectReplies', {
@@ -455,10 +433,13 @@ export default {
         }
       }).then(res => {
         if (res.code === '200') {
-          this.replyData = res.data?.list;
           const comment = this.findCommentById(this.commentData, commentId);
+/*          this.replyData = res.data?.list;
+          this.replyCount = res.data?.total;*/
           if (comment) {
-            this.$set(comment, 'children', res.data); // 替换为新的回复数据
+            // this.$set(comment, 'children', res.data); // 替换为新的回复数据
+            comment.children = res.data?.list; // 将回复数据直接赋值给评论的 children 字段
+            comment.replyCount = res.data?.total; // 更新评论的回复数
           }
         } else {
           this.$message.error(res.msg);
@@ -474,11 +455,11 @@ export default {
 
       if (this.showAllReplies[commentId]) {
         this.loadReplies(commentId, pageNum);
-      } else {
+      } /*else {
         // 当收起回复时,重新计算回复数量
         const comment = this.findCommentById(this.commentData, commentId);
-        comment.replyCount = this.countReplies(comment.children);
-      }
+        comment.replyCount = this.replyCount;
+      }*/
     },
     findCommentById(comments, commentId) {
       // 根据评论ID查找对应的评论
@@ -486,12 +467,6 @@ export default {
         if (comments[i].id === commentId) {
           //console.log(comments[i])
           return comments[i];
-        }
-        if (comments[i].children && comments[i].children.length > 0) {
-          const foundComment = this.findCommentById(comments[i].children, commentId);
-          if (foundComment) {
-            return foundComment;
-          }
         }
       }
       return null;
@@ -546,7 +521,7 @@ export default {
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
         this.$request.delete('/comment/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('操作成功')
+            this.$message.success('删除成功')
             this.loadComments();
             this.fetchCommentCount();
           } else {

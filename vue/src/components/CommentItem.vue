@@ -88,10 +88,10 @@ export default {
       type: Object,
       required: true
     },
-    replyData: {
+/*    replyData: {
       type: Array,
       required: true
-    },
+    },*/
     replyPageSize: {
       type: Number,
       required: true
@@ -104,31 +104,10 @@ export default {
     // 返回显示的回复列表
     visibleReplies(item) {
       if (this.showAllReplies[item.id]) {
-        return this.paginatedReplies(item);
+        return item.children;
       } else {
-        return this.flattenReplies(item).slice(0, 2);
+        return item.children?.slice(0, 2) || [];
       }
-    },
-    // 返回分页后的回复列表
-    paginatedReplies(item) {
-      const startIndex = (item.replyPageNum - 1) * this.replyPageSize;
-      const endIndex = startIndex + this.replyPageSize;
-      return this.flattenReplies(item).slice(startIndex, endIndex);
-    },
-    // 扁平化回复列表
-    flattenReplies(item) {
-      const flattenedReplies = [];
-      const flatten = (replies, depth) => {
-        replies.forEach(reply => {
-          reply.depth = depth;
-          flattenedReplies.push(reply);
-          if (reply.children) {
-            flatten(reply.children, depth + 1);
-          }
-        });
-      };
-      flatten(item.children, 1);
-      return flattenedReplies;
     },
     // 处理页码变化
     handlePageChange(item, pageNum) {
@@ -137,10 +116,7 @@ export default {
     },
     // 切换回复的展开与收起状态
     toggleReplies(commentId) {
-      this.$set(this.showAllReplies, commentId, !this.showAllReplies[commentId]);
-      if (this.showAllReplies[commentId]) {
-        this.$emit('loadReplies', commentId, 1); // 展开回复时加载第一页回复
-      }
+      this.$emit('toggleReplies', commentId);
     },
 
     openReplyDialog(commentId) {

@@ -236,7 +236,7 @@ public class TypeService {
      * 查询房型评论数
      */
     public Integer getCommentCountByTypeId(Integer typeId) {
-        return commentMapper.getCountByTypeId(typeId);
+        return commentMapper.getCountByTypeId(typeId,0);
     }
 
 

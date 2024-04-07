@@ -57,6 +57,10 @@ public class Comment implements Serializable {
      */
     private List<Comment> children;
 
+    /**
+     * 删除状态
+     */
+    private Integer deleted;
 
     public Integer getId() {
         return id;
@@ -160,5 +164,13 @@ public class Comment implements Serializable {
 
     public void setChildren(List<Comment> children) {
         this.children = children;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }
