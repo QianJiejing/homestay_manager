@@ -1,5 +1,6 @@
 package com.example.common.config;
 
+import com.example.controller.interceptor.RateLimiterInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

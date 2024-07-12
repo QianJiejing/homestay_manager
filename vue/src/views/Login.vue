@@ -64,8 +64,6 @@ export default {
   },
   methods: {
     getCode() {
-      // this.uuid = generateUUID()
-      // this.codeImg = this.$baseUrl + '/validateCode?key=' + this.uuid
       this.uuid = generateUUID()
       this.codeImg = this.$baseUrl + '/getValidateCode?key=' + this.uuid
     },

@@ -33,6 +33,12 @@
                 <if test="typeId != null">#{typeId},</if>
         </trim>
     </insert>
+    <select id="selectLatestThreeByUserId" resultType="com.example.entity.Collect">
+        select type.name as typeName, type.price as typePrice, type.num as typeNum, type.img as typeImg
+        from collect
+                 left join type on collect.type_id = type.id
+        where collect.user_id = #{id} ORDER BY collect.id DESC LIMIT 3
+    </select>
 
 <!--    <select id="selectByUserId" resultType="com.example.entity.Collect">
         select type.name as typeName, type.price as typePrice, type.num as typeNum, type.img as typeImg

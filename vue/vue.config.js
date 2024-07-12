@@ -10,8 +10,8 @@ module.exports = defineConfig({
     proxy: {
       '/ws': {  // 匹配需要代理的 WebSocket 路径
           // WebSocket 服务器地址
-          target: 'http://localhost:8080',
-          ws: false,
+          target: 'http://localhost:9090',
+          //ws: false,
           // 设置 changeOrigin 为 true，解决跨域问题
           changeOrigin: true,
           pathRewrite: {

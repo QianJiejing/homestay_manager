@@ -177,7 +177,6 @@ export default {
         this.$request.delete('/admin/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
-            this.load(1)
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
           }

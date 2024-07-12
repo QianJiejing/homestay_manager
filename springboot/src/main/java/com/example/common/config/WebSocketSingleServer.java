@@ -30,6 +30,7 @@ public class WebSocketSingleServer implements InitializingBean {
     /**
      * 记录当前在线连接数
      */
+    //存放会话对象
     public static final Map<String, Session> sessionMap = new ConcurrentHashMap<>();
 
     @Resource

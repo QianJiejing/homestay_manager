@@ -8,6 +8,11 @@ spring:
     username: root   #你本地的数据库用户名
     password: 123456 #你本地的数据库密码
     url: jdbc:mysql://localhost:3308/homestay_manager?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
   servlet:
     multipart:
       max-file-size: 100MB
@@ -29,3 +34,5 @@ pagehelper:
   params: count=countSql
 
 ip: localhost
+
+APPID: wxb362e7e80ed32ad7

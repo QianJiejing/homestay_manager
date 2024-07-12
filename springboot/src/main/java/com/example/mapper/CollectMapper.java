@@ -32,6 +32,14 @@ public interface CollectMapper {
      */
     List<Collect> selectAll(Collect collect);
 
+    List<Collect> selectLatestThreeByUserId(Integer id);
+
+    /**
+     * 查询对应用户的收藏数
+     */
+    @Select("SELECT COUNT(*) FROM collect WHERE user_id = #{userId}")
+    int getCountByUserId(@Param("userId") Integer userId);
+
     // List<Collect> selectByUserId(Integer id);
 
 }

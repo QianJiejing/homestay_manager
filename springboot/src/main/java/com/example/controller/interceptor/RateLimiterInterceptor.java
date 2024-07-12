@@ -1,4 +1,4 @@
-package com.example.common.config;
+package com.example.controller.interceptor;
 
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;

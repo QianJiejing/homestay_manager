@@ -21,6 +21,16 @@ public class User extends Account implements Serializable {
     private String avatar;
     /** 角色标识 */
     private String role;
+    /** 性别 */
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     @Override
     public Integer getId() {

@@ -55,6 +55,13 @@ public class CollectService {
         return collectMapper.selectByUserId(id);
 
     }*/
+    public List<Collect> selectLatestThreeByUserId(Integer id){
+        return collectMapper.selectLatestThreeByUserId(id);
+    }
+
+    public Integer getCollectCountByUserId(Integer userId) {
+        return collectMapper.getCountByUserId(userId);
+    }
 
 
 }

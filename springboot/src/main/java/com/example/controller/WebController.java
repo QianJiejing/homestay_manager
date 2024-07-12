@@ -113,11 +113,13 @@ public class WebController {
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             account = adminService.login(account);
         }
-        if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
+        else if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
             account = homestayService.login(account);
         }
-        if (RoleEnum.USER.name().equals(account.getRole())){
+        else if (RoleEnum.USER.name().equals(account.getRole())){
             account = userService.login(account);
+        } else {
+            return Result.error(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
         return Result.success(account);
     }
@@ -134,10 +136,10 @@ public class WebController {
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.register(account);
         }
-        if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
+        else if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
             homestayService.register(account);
         }
-        if (RoleEnum.USER.name().equals(account.getRole())) {
+        else if (RoleEnum.USER.name().equals(account.getRole())) {
             userService.register(account);
         }
         return Result.success();
@@ -155,11 +157,13 @@ public class WebController {
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.updatePassword(account);
         }
-        if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
+        else if (RoleEnum.HOMESTAY.name().equals(account.getRole())) {
             homestayService.updatePassword(account);
         }
-        if (RoleEnum.USER.name().equals(account.getRole())) {
+        else if (RoleEnum.USER.name().equals(account.getRole())) {
             userService.updatePassword(account);
+        }else {
+            return Result.error(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
         return Result.success();
     }

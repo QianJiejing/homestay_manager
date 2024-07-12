@@ -1,4 +1,4 @@
-package com.example.common.config;
+package com.example.controller.interceptor;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.auth0.jwt.JWT;
