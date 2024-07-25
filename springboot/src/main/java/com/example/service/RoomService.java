@@ -18,6 +18,7 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,6 +39,7 @@ public class RoomService {
     /**
      * 新增
      */
+    @Transactional
     public void add(Room room) {
         if(StatusCheckUtils.isAudit()){
             room.setStatus(RoomEnum.STATUS_OK.status);

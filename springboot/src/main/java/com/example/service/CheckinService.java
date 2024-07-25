@@ -21,6 +21,7 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class CheckinService {
     /**
      * 新增
      */
+    @Transactional
     public void add(Checkin checkin) {
         if(StatusCheckUtils.isAudit()){
 
@@ -140,7 +142,7 @@ public class CheckinService {
         checkin.setUserId(id);
         return checkinMapper.selectAll(checkin);
     }
-
+    @Transactional
     public void tuifang(Integer id) {
 
         Checkin checkin = checkinMapper.selectById(id);
